@@ -1,10 +1,21 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { reset, Field, reduxForm } from 'redux-form';
 import TextField from '@material-ui/core/TextField';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { createInquiry } from '../redux/actions';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  button: {
+    margin: theme.spacing(1)
+  },
+  input: {
+    display: 'none'
+  }
+}));
 
 const validate = values => {
   const errors = {};
@@ -56,17 +67,14 @@ const renderFromHelper = ({ touched, error }) => {
 };
 
 let Inquiry = props => {
-  const { handleSubmit, pristine, reset, submitting, classes } = props;
-  //handleSubmit = formValues => props.createInquiry(formValues);
+  const { handleSubmit, pristine, reset, submitting } = props;
+  const classes = useStyles();
 
   const onSubmit = formValues => {
     props.createInquiry(formValues);
-    //console.log(formValues);
-    //props.createInquiry(formValues);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {console.log(props)}
       <Typography>お問い合わせ</Typography>
       <div>
         <Field name='title' component={renderTextField} label='Title' />
@@ -77,21 +85,34 @@ let Inquiry = props => {
       <div />
       <div>
         <Field
-          name='notes'
+          name='content'
           component={renderTextField}
-          label='Notes'
+          label='Content'
           multiline
           rowsMax='4'
           margin='normal'
         />
       </div>
       <div>
-        <button type='submit' disabled={pristine || submitting}>
+        <Button
+          type='submit'
+          variant='contained'
+          className={classes.button}
+          color='primary'
+          disabled={pristine || submitting}
+        >
           Submit
-        </button>
-        <button type='button' disabled={pristine || submitting} onClick={reset}>
+        </Button>
+        <Button
+          type='button'
+          variant='contained'
+          className={classes.button}
+          color='secondary'
+          disabled={pristine || submitting}
+          onClick={reset}
+        >
           Clear Values
-        </button>
+        </Button>
       </div>
     </form>
   );
@@ -102,7 +123,10 @@ Inquiry = connect(
   { createInquiry }
 )(Inquiry);
 
+const afterSubmit = (result, dispatch) => dispatch(reset('Inquiry'));
+
 export default reduxForm({
   form: 'Inquiry',
+  onSubmitSuccess: afterSubmit,
   validate
 })(Inquiry);

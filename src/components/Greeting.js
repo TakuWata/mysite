@@ -1,6 +1,8 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 const Greeting = () => {
   return (
@@ -10,6 +12,9 @@ const Greeting = () => {
         {'\n'}It’s easy. Just click “Edit Text” or {'\n'}double click me to add
         your own content {'\n'}and make changes to the font.
       </Typography>
+      <Link to='/about'>
+        <Button>See more details.</Button>
+      </Link>
     </div>
   );
 };

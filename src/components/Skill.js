@@ -3,8 +3,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
 
 const useStyles = makeStyles(theme => ({
+  card: {
+    maxWidth: 345
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%' // 16:9
+  },
   react: {
     padding: theme.spacing(3, 2),
     backgroundSize: 'cover',
@@ -69,23 +79,77 @@ const Skill = () => {
         <Typography variant='h3'>Skills</Typography>
       </Grid>
 
-      <Grid item xs={4}>
-        <Paper className={classes.react}>Skill</Paper>
+      <Grid item sm={4} xs={6}>
+        <Card>
+          <CardMedia
+            className={classes.media}
+            image='../../../static/react.png'
+            title='React'
+          />
+          <CardContent>
+            <Typography>React</Typography>
+          </CardContent>
+        </Card>
       </Grid>
-      <Grid item xs={4}>
-        <Paper className={classes.redux}>Skill</Paper>
+      <Grid item sm={4} xs={6}>
+        <Card>
+          <CardMedia
+            className={classes.media}
+            image='../../../static/redux.png'
+            title='Redux'
+          />
+          <CardContent>
+            <Typography>Redux</Typography>
+          </CardContent>
+        </Card>
       </Grid>
-      <Grid item xs={4}>
-        <Paper className={classes.firebase}>Skill</Paper>
+      <Grid item sm={4} xs={6}>
+        <Card>
+          <CardMedia
+            className={classes.media}
+            image='../../../static/firebase.png'
+            title='Firebase'
+          />
+          <CardContent>
+            <Typography>Firebase</Typography>
+          </CardContent>
+        </Card>
       </Grid>
-      <Grid item xs={4}>
-        <Paper className={classes.sass}>Skill</Paper>
+      <Grid item sm={4} xs={6}>
+        <Card>
+          <CardMedia
+            className={classes.media}
+            image='../../../static/sass.png'
+            title='SCSS'
+          />
+          <CardContent>
+            <Typography>SCSS</Typography>
+          </CardContent>
+        </Card>
       </Grid>
-      <Grid item xs={4}>
-        <Paper className={classes.django}>Skill</Paper>
+      <Grid item sm={4} xs={6}>
+        <Card>
+          <CardMedia
+            className={classes.media}
+            image='../../../static/django.png'
+            title='Django'
+          />
+          <CardContent>
+            <Typography>Django</Typography>
+          </CardContent>
+        </Card>
       </Grid>
-      <Grid item xs={4}>
-        <Paper className={classes.mysql}>Skill</Paper>
+      <Grid item sm={4} xs={6}>
+        <Card>
+          <CardMedia
+            className={classes.media}
+            image='../../../static/mysql.png'
+            title='MySQL'
+          />
+          <CardContent>
+            <Typography>MySQL</Typography>
+          </CardContent>
+        </Card>
       </Grid>
     </Grid>
   );
