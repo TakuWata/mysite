@@ -9,7 +9,6 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-
 import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
