@@ -6,6 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { connect } from 'react-redux';
+import { logOut } from '../redux/actions';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,9 +22,29 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Navbar = () => {
+const Navbar = props => {
   const classes = useStyles();
 
+  const renderButton = () => {
+    if (props.isAuthenticated) {
+      return (
+        <Button onClick={props.logOut} color='inherit'>
+          Logout
+        </Button>
+      );
+    } else {
+      return (
+        <div>
+          <Button component={Link} to='/admin' color='inherit'>
+            Login
+          </Button>
+          <Button component={Link} to='/signup' color='inherit'>
+            Sign Up
+          </Button>
+        </div>
+      );
+    }
+  };
   return (
     <div className={classes.root}>
       <AppBar position='static'>
@@ -37,11 +60,20 @@ const Navbar = () => {
           <Typography variant='h6' className={classes.title}>
             News
           </Typography>
-          <Button color='inherit'>Login</Button>
+          {renderButton()}
         </Toolbar>
       </AppBar>
     </div>
   );
 };
 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.firebase.auth.uid
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { logOut }
+)(Navbar);

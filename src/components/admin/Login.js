@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { login } from '../../redux/actions/index';
+import { connect } from 'react-redux';
+import Layout from '../Layout';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -37,86 +38,85 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = () => {
+const Login = props => {
   const classes = useStyles();
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
 
   const onSubmit = event => {
     event.preventDefault();
-    console.log(emailValue);
-    console.log(passwordValue);
-    const firebase = getFirebase();
-    console.log(firebase);
+    const cred = { email: emailValue, password: passwordValue };
+    props.login(cred);
   };
 
   return (
-    <div className={classes.paper}>
-      <Avatar className={classes.avatar}>
-        <LockOutlinedIcon />
-      </Avatar>
-      <Typography component='h1' variant='h5'>
-        Sign in
-      </Typography>
-      <form className={classes.form} noValidate onSubmit={onSubmit}>
-        <TextField
-          variant='outlined'
-          margin='normal'
-          required
-          fullWidth
-          id='email'
-          label='Email Address'
-          name='email'
-          autoComplete='email'
-          autoFocus
-          onChange={() => {
-            setEmailValue(event.target.value);
-          }}
-          value={emailValue}
-        />
-        <TextField
-          variant='outlined'
-          margin='normal'
-          required
-          fullWidth
-          name='password'
-          label='Password'
-          type='password'
-          id='password'
-          autoComplete='current-password'
-          onChange={() => {
-            setPasswordValue(event.target.value);
-          }}
-          value={passwordValue}
-        />
-        <FormControlLabel
-          control={<Checkbox value='remember' color='primary' />}
-          label='Remember me'
-        />
-        <Button
-          type='submit'
-          fullWidth
-          variant='contained'
-          color='primary'
-          className={classes.submit}
-        >
-          Sign In
-        </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link href='#' variant='body2'>
-              Forgot password?
-            </Link>
+    <Layout>
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component='h1' variant='h5'>
+          Sign in
+        </Typography>
+        <form className={classes.form} noValidate onSubmit={onSubmit}>
+          <TextField
+            variant='outlined'
+            margin='normal'
+            required
+            fullWidth
+            id='email'
+            label='Email Address'
+            name='email'
+            autoComplete='email'
+            autoFocus
+            onChange={() => {
+              setEmailValue(event.target.value);
+            }}
+            value={emailValue}
+          />
+          <TextField
+            variant='outlined'
+            margin='normal'
+            required
+            fullWidth
+            name='password'
+            label='Password'
+            type='password'
+            id='password'
+            autoComplete='current-password'
+            onChange={() => {
+              setPasswordValue(event.target.value);
+            }}
+            value={passwordValue}
+          />
+          <FormControlLabel
+            control={<Checkbox value='remember' color='primary' />}
+            label='Remember me'
+          />
+          <Button
+            type='submit'
+            fullWidth
+            variant='contained'
+            color='primary'
+            className={classes.submit}
+          >
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link to='#'>Forgot password?</Link>
+            </Grid>
+            <Grid item>
+              <Link to='/signup'>{"Don't have an account? Sign Up"}</Link>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Link href='#' variant='body2'>
-              {"Don't have an account? Sign Up"}
-            </Link>
-          </Grid>
-        </Grid>
-      </form>
-    </div>
+        </form>
+      </div>
+    </Layout>
   );
 };
 
-export default Login;
+export default connect(
+  null,
+  { login }
+)(Login);
