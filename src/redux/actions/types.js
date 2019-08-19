@@ -5,3 +5,5 @@ export const SIGNUP_ERROR = 'signup_error';
 export const SIGNUP_SUCCESS = 'signup_success';
 export const FETCH_INQUIRIES_ERR = 'fetch_inquiries_err';
 export const FETCH_INQUIRIES = 'fetch_inquiries';
+export const EDIT_INQUIRY = 'edit_inquiry';
+export const EDIT_INQUIRY_ERR = 'edit_inquiry_err';

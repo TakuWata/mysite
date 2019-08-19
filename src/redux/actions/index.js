@@ -5,7 +5,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   SIGNUP_SUCCESS,
-  SIGNUP_ERROR
+  SIGNUP_ERROR,
+  EDIT_INQUIRY,
+  EDIT_INQUIRY_ERR
 } from './types';
 import firebase, { db } from '../../config/fbConfig';
 import history from '../../../history';
@@ -38,6 +40,52 @@ export const fetchInquiries = () => async dispatch => {
     })
     .catch(err => {
       dispatch({ type: FETCH_INQUIRIES_ERR, err });
+    });
+};
+
+export const editInquiry = id => async dispatch => {
+  let inquiriesArray = [];
+  const doc = await db.collection('inquiries').doc(id);
+  doc.update({
+    completed: true
+  });
+  const docs = await db.collection('inquiries').orderBy('createdAt', 'desc');
+  docs
+    .get()
+    .then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        let data = doc.data();
+        data.id = doc.id;
+        inquiriesArray.push(data);
+      });
+      dispatch({ type: EDIT_INQUIRY, payload: inquiriesArray });
+    })
+    .catch(err => {
+      dispatch({ type: EDIT_INQUIRY_ERR, err });
+    });
+};
+
+export const editCompletedInquiry = id => async dispatch => {
+  let inquiriesArray = [];
+  await db
+    .collection('inquiries')
+    .doc(id)
+    .update({
+      completed: false
+    });
+  const docs = await db.collection('inquiries').orderBy('createdAt', 'desc');
+  docs
+    .get()
+    .then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        let data = doc.data();
+        data.id = doc.id;
+        inquiriesArray.push(data);
+      });
+      dispatch({ type: EDIT_INQUIRY, payload: inquiriesArray });
+    })
+    .catch(err => {
+      dispatch({ type: EDIT_INQUIRY_ERR, err });
     });
 };
 

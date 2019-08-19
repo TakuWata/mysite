@@ -7,6 +7,7 @@ import { firebaseReducer } from 'react-redux-firebase';
 export default combineReducers({
   form: formReducer,
   inquiry: inquiryReducer,
+  //checkBox: checkBoxReducer,
   auth: authReducer,
   firebase: firebaseReducer
 });

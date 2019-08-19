@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { connect } from 'react-redux';
 import { logOut } from '../redux/actions';
 import { Link } from 'react-router-dom';
+import history from '../../history';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,11 +28,28 @@ const Navbar = props => {
 
   const renderButton = () => {
     if (props.isAuthenticated) {
-      return (
-        <Button onClick={props.logOut} color='inherit'>
-          Logout
-        </Button>
-      );
+      if (history.location.pathname === '/') {
+        return (
+          <React.Fragment>
+            <Button component={Link} to='/admin' color='inherit'>
+              Admin
+            </Button>
+            <Button onClick={props.logOut} color='inherit'>
+              Logout
+            </Button>
+          </React.Fragment>
+        );
+      } else if (history.location.pathname === '/admin')
+        return (
+          <React.Fragment>
+            <Button component={Link} to='/' color='inherit'>
+              Home
+            </Button>
+            <Button onClick={props.logOut} color='inherit'>
+              Logout
+            </Button>
+          </React.Fragment>
+        );
     } else {
       return (
         <div>

@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, updateState } from 'react';
 import Layout from '../Layout';
 import Login from './Login';
 import { connect } from 'react-redux';
-import { fetchInquiries } from '../../redux/actions';
+import {
+  fetchInquiries,
+  editInquiry,
+  editCompletedInquiry
+} from '../../redux/actions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -14,6 +18,9 @@ import moment from 'moment';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
+  },
+  spinner: {
+    margin: theme.spacing(3)
   },
   paperRoot: {
     color: theme.palette.text.primary,
@@ -32,6 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 const Admin = props => {
   const classes = useStyles();
+
   useEffect(() => {
     props.fetchInquiries();
   }, []);
@@ -45,37 +53,85 @@ const Admin = props => {
 
   const renderInquiries = () => {
     return props.inquiries.map(inquiry => {
-      return (
-        <Grid item xs={12} key={inquiry.id}>
-          <Paper className={classes.paperList}>
-            <Grid container>
-              <Grid item xs={2}>
-                {inquiry.title}
+      if (!inquiry.completed) {
+        return (
+          <Grid item xs={12} key={inquiry.id}>
+            <Paper className={classes.paperList}>
+              <Grid container>
+                <Grid item xs={1}>
+                  <Checkbox
+                    onChange={() => props.editInquiry(inquiry.id)}
+                    color='primary'
+                    inputProps={{
+                      'aria-label': 'primary checkbox'
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={2}>
+                  {inquiry.title}
+                </Grid>
+                <Grid item xs={2}>
+                  {moment(inquiry.createdAt.toDate()).format('YYYY[/]MM[/]DD')}
+                </Grid>
+                <Grid item xs={2}>
+                  {inquiry.email}
+                </Grid>
+                <Grid item xs={5}>
+                  {inquiry.content}
+                </Grid>
               </Grid>
-              <Grid item xs={2}>
-                {moment(inquiry.createdAt.toDate()).format('YYYY[/]MM[/]DD')}
+            </Paper>
+          </Grid>
+        );
+      }
+    });
+  };
+  const renderCompletedInquiries = () => {
+    return props.inquiries.map(inquiry => {
+      if (inquiry.completed) {
+        return (
+          <Grid item xs={12} key={inquiry.id}>
+            <Paper className={classes.paperList}>
+              <Grid container>
+                <Grid item xs={1}>
+                  <Checkbox
+                    checked={inquiry.completed}
+                    onChange={() => props.editCompletedInquiry(inquiry.id)}
+                    color='primary'
+                    inputProps={{
+                      'aria-label': 'primary checkbox'
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={2}>
+                  {inquiry.title}
+                </Grid>
+                <Grid item xs={2}>
+                  {moment(inquiry.createdAt.toDate()).format('YYYY[/]MM[/]DD')}
+                </Grid>
+                <Grid item xs={2}>
+                  {inquiry.email}
+                </Grid>
+                <Grid item xs={5}>
+                  {inquiry.content}
+                </Grid>
               </Grid>
-              <Grid item xs={2}>
-                {inquiry.email}
-              </Grid>
-              <Grid item xs={6}>
-                {inquiry.content}
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-      );
+            </Paper>
+          </Grid>
+        );
+      }
     });
   };
   if (!props.isAuthenticated) return <Login />;
-  if (isEmpty(props.inquiries))
+  if (isEmpty(props.inquiries)) {
     return (
       <Layout>
-        <Grid container spacing={3} className={classes.root}>
-          <CircularProgress />
+        <Grid container spacing={3} className={classes.spinner}>
+          <CircularProgress style={{ margin: 'auto' }} />
         </Grid>
       </Layout>
     );
+  }
   return (
     <Layout>
       <Paper className={classes.paperRoot}>
@@ -88,6 +144,7 @@ const Admin = props => {
         </Typography>
         <Paper className={classes.paperList} style={{ marginBottom: '1rem' }}>
           <Grid container spacing={3}>
+            <Grid item xs={1} />
             <Grid item xs={2}>
               Title
             </Grid>
@@ -97,13 +154,42 @@ const Admin = props => {
             <Grid item xs={2}>
               Email
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={5}>
               Content
             </Grid>
           </Grid>
         </Paper>
         <Grid container spacing={3} className={classes.root}>
           {renderInquiries()}
+        </Grid>
+      </Paper>
+      <Paper className={classes.paperRoot}>
+        <Typography
+          color='primary'
+          variant='h6'
+          style={{ marginBottom: '.5rem' }}
+        >
+          COMPLETED
+        </Typography>
+        <Paper className={classes.paperList} style={{ marginBottom: '1rem' }}>
+          <Grid container spacing={3}>
+            <Grid item xs={1} />
+            <Grid item xs={2}>
+              Title
+            </Grid>
+            <Grid item xs={2}>
+              Time
+            </Grid>
+            <Grid item xs={2}>
+              Email
+            </Grid>
+            <Grid item xs={5}>
+              Content
+            </Grid>
+          </Grid>
+        </Paper>
+        <Grid container spacing={3} className={classes.root}>
+          {renderCompletedInquiries()}
         </Grid>
       </Paper>
     </Layout>
@@ -113,11 +199,12 @@ const Admin = props => {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.firebase.auth.uid,
-    inquiries: state.inquiry
+    inquiries: state.inquiry,
+    checkBox: state.checkBox
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchInquiries }
+  { fetchInquiries, editInquiry, editCompletedInquiry }
 )(Admin);
