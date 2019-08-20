@@ -12,6 +12,7 @@ import { login } from '../../redux/actions/index';
 import { connect } from 'react-redux';
 import Layout from '../Layout';
 import { Link } from 'react-router-dom';
+import history from '../../../history';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -49,6 +50,9 @@ const Login = props => {
     props.login(cred);
   };
 
+  if (props.isAuthenticated) {
+    history.push('/admin');
+  }
   return (
     <Layout>
       <div className={classes.paper}>
@@ -73,6 +77,7 @@ const Login = props => {
               setEmailValue(event.target.value);
             }}
             value={emailValue}
+            autoComplete='off'
           />
           <TextField
             variant='outlined'
@@ -88,6 +93,7 @@ const Login = props => {
               setPasswordValue(event.target.value);
             }}
             value={passwordValue}
+            autoComplete='off'
           />
           <FormControlLabel
             control={<Checkbox value='remember' color='primary' />}
@@ -116,7 +122,13 @@ const Login = props => {
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.firebase.auth.uid
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { login }
 )(Login);

@@ -14,6 +14,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
+import history from '../../../history';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -122,7 +123,9 @@ const Admin = props => {
       }
     });
   };
-  if (!props.isAuthenticated) return <Login />;
+  if (!props.isAuthenticated) {
+    history.push('/login');
+  }
   if (isEmpty(props.inquiries)) {
     return (
       <Layout>
