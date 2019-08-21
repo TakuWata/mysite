@@ -29,6 +29,7 @@ describe('<Login /> rendering', () => {
 describe('<Login /> possible to login', () => {
   let wrapper;
   let mount;
+  let event = {};
   beforeEach(() => {
     mount = createMount();
     wrapper = mount(
@@ -39,24 +40,13 @@ describe('<Login /> possible to login', () => {
       </Root>
     );
 
-    wrapper.find('input').at(0);
-    // .simulate('change', {
-    //   target: { value: 'test@test.com' }
-    // });
-    // wrapper
-    //   .find('input')
-    //   .at(0)
-    //   .simulate('change', {
-    //     target: { value: 'test1234' }
-    //   });
+    event = { target: { name: 'email', value: 'test@test.com' } };
+    wrapper.find('input[type="text"]').simulate('change', event);
+    wrapper.find('input[type="password"]').simulate('change', {
+      target: { name: 'password', value: 'test1234' }
+    });
     wrapper.update();
-    console.log(
-      wrapper
-        .find('input')
-        .at(0)
-        .prop('onChange')
-      //.debug()
-    );
+    console.log(wrapper.find('input').debug());
   });
   afterEach(() => {
     mount.cleanUp();
