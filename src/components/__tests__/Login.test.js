@@ -40,30 +40,23 @@ describe('<Login /> possible to login', () => {
       </Root>
     );
 
-    event = { target: { name: 'email', value: 'test@test.com' } };
+    const event = { target: { name: 'email', value: 'test@test.com' } };
     wrapper.find('input[type="text"]').simulate('change', event);
     wrapper.find('input[type="password"]').simulate('change', {
       target: { name: 'password', value: 'test1234' }
     });
     wrapper.update();
-    console.log(wrapper.find('input').debug());
   });
   afterEach(() => {
     mount.cleanUp();
   });
 
   it('changes inputs after submitting', () => {
-    // expect(
-    //   wrapper
-    //     .find('input')
-    //     .at(0)
-    //     .prop('value')
-    // ).toEqual('test@test.com');
-    // expect(
-    //   wrapper
-    //     .find('input')
-    //     .at(1)
-    //     .prop('value')
-    // ).toEqual('test1234');
+    expect(wrapper.find('input[type="text"]').prop('value')).toEqual(
+      'test@test.com'
+    );
+    expect(wrapper.find('input[type="password"]').prop('value')).toEqual(
+      'test1234'
+    );
   });
 });

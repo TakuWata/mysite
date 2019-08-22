@@ -73,7 +73,7 @@ const Login = props => {
             name='email'
             autoComplete='email'
             autoFocus
-            onChange={() => {
+            onChange={event => {
               setEmailValue(event.target.value);
             }}
             value={emailValue}
@@ -89,7 +89,7 @@ const Login = props => {
             type='password'
             id='password'
             autoComplete='current-password'
-            onChange={() => {
+            onChange={event => {
               setPasswordValue(event.target.value);
             }}
             value={passwordValue}

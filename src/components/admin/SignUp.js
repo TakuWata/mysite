@@ -72,7 +72,7 @@ const SignUp = props => {
                 label='Email Address'
                 name='email'
                 autoComplete='email'
-                onChange={() => {
+                onChange={event => {
                   setEmailValue(event.target.value);
                 }}
                 value={emailValue}
@@ -88,7 +88,7 @@ const SignUp = props => {
                 type='password'
                 id='password'
                 autoComplete='current-password'
-                onChange={() => {
+                onChange={event => {
                   setPasswordValue(event.target.value);
                 }}
                 value={passwordValue}
