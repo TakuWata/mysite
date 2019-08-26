@@ -1,18 +1,24 @@
-version: 2.1
+version: 2
 jobs:
-  deploy_dev: # ジョブ名
+  build:
     docker:
       - image: circleci/node:12.9 # ジョブ実行環境のDockerイメージを記述
+    working_directory: ~/repo
 
     steps:
       - checkout # ソースコードのチェックアウト
-      - run: # 順に実行したいコマンドとコマンドに名前をつけます
-          name: yarn install
-          command: yarn install
-      - run:
-          name: build
-          command: yarn build
-      - run:
-          name: deploy to Firebase Hosting
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
+      - restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "package.json"}}
+          - v1-dependencies-
+
+      - run: yarn install
+      - save_cache:
+        paths:
+          - node_modules
+        key: v1-dependencies-{{ checksum "package.json"}}
+      # run test
+      - run: yarn test
+      - run: yarn build
+      - run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
 
