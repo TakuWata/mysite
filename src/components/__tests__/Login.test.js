@@ -29,7 +29,6 @@ describe('<Login /> rendering', () => {
 describe('<Login /> possible to login', () => {
   let wrapper;
   let mount;
-  let event = {};
   beforeEach(() => {
     mount = createMount();
     wrapper = mount(
@@ -39,9 +38,9 @@ describe('<Login /> possible to login', () => {
         </Router>
       </Root>
     );
-
-    const event = { target: { name: 'email', value: 'test@test.com' } };
-    wrapper.find('input[type="text"]').simulate('change', event);
+    wrapper.find('input[type="text"]').simulate('change', {
+      target: { name: 'email', value: 'test@test.com' }
+    });
     wrapper.find('input[type="password"]').simulate('change', {
       target: { name: 'password', value: 'test1234' }
     });

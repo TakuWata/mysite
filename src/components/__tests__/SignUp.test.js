@@ -39,9 +39,11 @@ describe('<SignUp /> possible to sign up', () => {
         </Router>
       </Root>
     );
-
-    const event = { target: { name: 'email', value: 'jest@test.com' } };
-    wrapper.find('input[type="text"]').simulate('change', event);
+    wrapper
+      .find('input[type="text"]')
+      .simulate('change', {
+        target: { name: 'email', value: 'jest@test.com' }
+      });
     wrapper.find('input[type="password"]').simulate('change', {
       target: { name: 'password', value: 'jest1234' }
     });

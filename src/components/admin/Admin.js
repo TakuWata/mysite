@@ -124,7 +124,8 @@ const Admin = props => {
     });
   };
   if (!props.isAuthenticated) {
-    history.push('/login');
+    //history.push('/login');
+    return <Login />;
   }
   if (isEmpty(props.inquiries)) {
     return (

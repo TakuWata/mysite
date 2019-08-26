@@ -5,7 +5,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
-
+dist/
+build/
+mysite-754ed-firebase-adminsdk-9fcsu-005835d7ad.json
 # Firebase cache
 .firebase/
 
