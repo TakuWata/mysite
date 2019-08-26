@@ -1,0 +1,32 @@
+version: 2.1
+jobs:
+  deploy_dev: # ジョブ名
+    docker:
+      - image: circleci/node:12.9 # ジョブ実行環境のDockerイメージを記述
+    branches:
+      only:
+        - master
+    working_directory: ~/mysite
+    environment:
+      FIREBASE_PROJECT: mysite-754ed
+      FIREBASE_TOKEN: ${FIREBASE_TOKEN}
+    steps:
+      - checkout # ソースコードのチェックアウト
+      - run: # 順に実行したいコマンドとコマンドに名前をつけます
+          name: yarn install
+          command: yarn install
+      - run:
+          name: build
+          command: yarn build
+      - run:
+          name: deploy to Firebase Hosting
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
+
+workflows:
+  version: 2
+  deploy_dev: # ワークフローの名前
+    jobs:
+      - deploy_dev: # 上で定義したジョブを指定します
+          filters:
+            branches:
+              only: develop # developブランチのみを実行対象とします
