@@ -39,3 +39,6 @@ workflows:
       - deploy:
           requires:
             - test
+          filters:
+            branches:
+              - master
