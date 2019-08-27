@@ -94,7 +94,7 @@ export const login = cred => async dispatch => {
     .auth()
     .signInWithEmailAndPassword(cred.email, cred.password)
     .then(() => {
-      dispatch({ type: LOGIN_SUCCESS });
+      dispatch({ type: LOGIN_SUCCESS, payload: cred });
     })
     .catch(err => {
       dispatch({ type: LOGIN_ERROR, err });
