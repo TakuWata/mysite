@@ -9,9 +9,9 @@ describe('<Resume /> rendering', () => {
     shallow = createShallow();
     wrapper = shallow(<About />);
   });
-  it('has 1 <div /> and 3 <Paper />', () => {
+  it('has 1 <div /> and 6 <Paper />', () => {
     expect(wrapper.find('div')).toHaveLength(1);
-    expect(wrapper.find('WithStyles(ForwardRef(Paper))')).toHaveLength(3);
+    expect(wrapper.find('WithStyles(ForwardRef(Paper))')).toHaveLength(6);
     expect(wrapper.find('ReduxForm')).toHaveLength(1);
   });
 });

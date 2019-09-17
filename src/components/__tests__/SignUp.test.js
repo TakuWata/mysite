@@ -20,9 +20,9 @@ describe('<SignUp /> rendering', () => {
   afterEach(() => {
     mount.cleanUp();
   });
-  it('has 3 <input /> and a <button />', () => {
-    expect(wrapper.find('input')).toHaveLength(3);
-    expect(wrapper.find('button')).toHaveLength(2);
+  it('has 2 <input /> and a <button />', () => {
+    expect(wrapper.find('input')).toHaveLength(2);
+    expect(wrapper.find('button')).toHaveLength(1);
   });
 });
 
@@ -39,11 +39,9 @@ describe('<SignUp /> possible to sign up', () => {
         </Router>
       </Root>
     );
-    wrapper
-      .find('input[type="text"]')
-      .simulate('change', {
-        target: { name: 'email', value: 'jest@test.com' }
-      });
+    wrapper.find('input[type="text"]').simulate('change', {
+      target: { name: 'email', value: 'jest@test.com' }
+    });
     wrapper.find('input[type="password"]').simulate('change', {
       target: { name: 'password', value: 'jest1234' }
     });

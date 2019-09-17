@@ -21,7 +21,7 @@ describe('<Admin /> rendering', () => {
   afterEach(() => {
     mount.cleanUp();
   });
-  it('has 13 <div /> ', () => {
-    expect(wrapper.find('div')).toHaveLength(13);
+  it('has 12 <div /> ', () => {
+    expect(wrapper.find('div')).toHaveLength(12);
   });
 });

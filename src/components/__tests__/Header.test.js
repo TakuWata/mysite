@@ -9,8 +9,7 @@ describe('<Header /> rendering', () => {
     shallow = createShallow();
     wrapper = shallow(<Header />);
   });
-  it('has a <div /> and a <Typography />', () => {
+  it('has a <div /> ', () => {
     expect(wrapper.find('div')).toHaveLength(1);
-    expect(wrapper.find('WithStyles(ForwardRef(Typography))')).toHaveLength(1);
   });
 });
