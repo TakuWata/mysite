@@ -19,12 +19,43 @@ const middleware = [thunk]; // add your middlewares like `redux-thunk`
 const mockStore = configureStore(middleware);
 
 // jest.mock(actions, () => new Promise(resolve => true));
+// jest.mock('firebase', () => ({
+//   signInWithEmailAndPassword(email, password) {
+//     return Promise.resolve({ name: 'someUser' });
+//   }
+// }));
 
-let mockProps;
+// const success = () => {
+//   return {
+//     type: 'FETCH_DATA_SUCCESS'
+//   };
+// };
+
+it('should execute fetch data', () => {
+  // const store = mockStore({});
+  // const cred = { email: 'test@test.com', password: 'test1234' };
+  // // Return the promise
+  // return store
+  //   .dispatch(
+  //     () =>
+  //       // console.log(
+  //       //   firebase.auth().signInWithEmailAndPassword(cred.email, cred.password)
+  //       // )
+  //       firebase.auth().signInWithEmailAndPassword(cred.email, cred.password)
+  //     //actions.login(cred)
+  //   )
+  //   .then(() => {
+  //     const actions = store.getActions();
+  //     console.log(store.getActions()[0]);
+  //     console.log(MockFirebase);
+  //     expect(store.getActions()[0]).toEqual(success());
+  //   });
+});
+
 // Mock all the exports in the module.
-function mockFirebaseService() {
-  return new Promise(resolve => resolve(true));
-}
+// function mockFirebaseService() {
+//   return new Promise(resolve => resolve(true));
+// }
 
 // jest.mock(
 //   '../../../config/fbConfig',
@@ -45,24 +76,24 @@ function mockFirebaseService() {
 //   return new firebasemock.MockFirebaseSdk(() => mockauth).auth().flush();
 // });
 
-describe('login actions', () => {
-  let store;
-  beforeEach(() => {
-    store = mockStore({});
-    //firebase.auth().flush();
-  });
-  it('signIn should call firebase', () => {
-    const cred = { email: 'test@test.com', password: 'test1234' };
-    store
-      .dispatch(actions.login(cred))
-      .then(() => {
-        //const actions = store.getActions();
-        //console.log(actions);
-        expect(firebase.auth().currentUser).toBe(null);
-      })
-      .catch(err => console.log('error', err));
-  });
-});
+// describe('login actions', () => {
+//   let store;
+//   beforeEach(() => {
+//     store = mockStore({});
+//     //firebase.auth().flush();
+//   });
+//   it('signIn should call firebase', () => {
+//     const cred = { email: 'test@test.com', password: 'test1234' };
+//     store
+//       .dispatch(actions.login(cred))
+//       .then(() => {
+//         //const actions = store.getActions();
+//         //console.log(actions);
+//         expect(firebase.auth().currentUser).toBe(null);
+//       })
+//       .catch(err => console.log('error', err));
+//   });
+// });
 
 //it('login action', () => {
 //   const store = mockStore({});

@@ -1,5 +1,5 @@
 import React from 'react';
-import Resume from '../Resume';
+import AboutResume from '../AboutResume';
 import { createShallow } from '@material-ui/core/test-utils';
 
 describe('<Resume /> rendering', () => {
@@ -7,9 +7,9 @@ describe('<Resume /> rendering', () => {
   let shallow;
   beforeEach(() => {
     shallow = createShallow();
-    wrapper = shallow(<Resume />);
+    wrapper = shallow(<AboutResume />);
   });
   it('has 5 <div />', () => {
-    expect(wrapper.find('div')).toHaveLength(5);
+    expect(wrapper.find('div')).toHaveLength(2);
   });
 });

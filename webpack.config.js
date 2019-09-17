@@ -33,7 +33,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
-      filename: './index.html'
+      filename: './index.html',
+      favicon: './src/favicon.ico'
     }),
     new CopyPlugin([{ from: './static', to: 'static' }])
   ],

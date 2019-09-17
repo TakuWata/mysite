@@ -59,7 +59,7 @@ const SignUp = props => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component='h1' variant='h5'>
-          Sign up
+          サインアップ
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -69,7 +69,7 @@ const SignUp = props => {
                 required
                 fullWidth
                 id='email'
-                label='Email Address'
+                label='メールアドレス'
                 name='email'
                 autoComplete='email'
                 onChange={event => {
@@ -84,7 +84,7 @@ const SignUp = props => {
                 required
                 fullWidth
                 name='password'
-                label='Password'
+                label='パスワード'
                 type='password'
                 id='password'
                 autoComplete='current-password'
@@ -92,12 +92,6 @@ const SignUp = props => {
                   setPasswordValue(event.target.value);
                 }}
                 value={passwordValue}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value='allowExtraEmails' color='primary' />}
-                label='I want to receive inspiration, marketing promotions and updates via email.'
               />
             </Grid>
           </Grid>
@@ -108,12 +102,12 @@ const SignUp = props => {
             color='primary'
             className={classes.submit}
           >
-            Sign Up
+            サインアップ
           </Button>
           <Grid container justify='flex-end'>
             <Grid item>
               <Link to='/admin' variant='body2'>
-                Already have an account? Sign in
+                すでにサインアップ済みはお済みですか？ログイン。
               </Link>
             </Grid>
           </Grid>

@@ -25,7 +25,6 @@ describe('<Inquiry /> rendering', () => {
     expect(wrapper.find('textarea')).toHaveLength(2);
     expect(wrapper.find('button')).toHaveLength(2);
     expect(wrapper.find('form')).toHaveLength(1);
-    expect(wrapper.find('WithStyles(ForwardRef(Typography))')).toHaveLength(1);
   });
 });
 

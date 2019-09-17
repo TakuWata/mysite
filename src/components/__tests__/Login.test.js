@@ -20,9 +20,9 @@ describe('<Login /> rendering', () => {
   afterEach(() => {
     mount.cleanUp();
   });
-  it('has 3 <input /> and a <button />', () => {
-    expect(wrapper.find('input')).toHaveLength(3);
-    expect(wrapper.find('button')).toHaveLength(2);
+  it('has 2 <input /> and a <button />', () => {
+    expect(wrapper.find('input')).toHaveLength(2);
+    expect(wrapper.find('button')).toHaveLength(1);
   });
 });
 

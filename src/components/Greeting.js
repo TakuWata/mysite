@@ -7,13 +7,23 @@ import { Link } from 'react-router-dom';
 const Greeting = () => {
   return (
     <div style={{ whiteSpace: 'pre-line' }}>
+      <Typography
+        color='textSecondary'
+        variant='h5'
+        component='h6'
+        style={{ marginBottom: '1rem' }}
+      >
+        渡辺拓実（WATANABE TAKUMI)
+      </Typography>
       <Typography variant='body1' color='textPrimary'>
-        I'm a paragraph. {'\n'}　Click here to add your own text and edit me.{' '}
-        {'\n'}It’s easy. Just click “Edit Text” or {'\n'}double click me to add
-        your own content {'\n'}and make changes to the font.
+        React/Reduxを専門とするフロントエンドエンジニアです。{'\n'}
+        元々はDeNAやAmazon
+        Japanでウェブディレクターやマーケターとして働いていましたが、
+        {'\n'}思うところがありキャリアチェンジしてエンジニアになりました。{'\n'}
+        現在、1年と少し、フリーランスやっています。
       </Typography>
       <Link to='/about'>
-        <Button>See more details.</Button>
+        <Button>詳細を確認</Button>
       </Link>
     </div>
   );

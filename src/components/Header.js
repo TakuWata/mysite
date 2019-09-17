@@ -15,13 +15,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const Header = () => {
   const classes = useStyles();
-  return (
-    <div className={classes.root}>
-      <Typography color='textSecondary' variant='h1' component='h2'>
-        Takumi Watanabe
-      </Typography>
-    </div>
-  );
+  return <div className={classes.root}></div>;
 };
 
 export default Header;
