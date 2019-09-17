@@ -19,39 +19,37 @@ const middleware = [thunk]; // add your middlewares like `redux-thunk`
 const mockStore = configureStore(middleware);
 
 // jest.mock(actions, () => new Promise(resolve => true));
-jest.mock('firebase', () => ({
-  signInWithEmailAndPassword(email, password) {
-    return Promise.resolve({ name: 'someUser' });
-  }
-}));
+// jest.mock('firebase', () => ({
+//   signInWithEmailAndPassword(email, password) {
+//     return Promise.resolve({ name: 'someUser' });
+//   }
+// }));
 
-const success = () => {
-  return {
-    type: 'FETCH_DATA_SUCCESS'
-  };
-};
+// const success = () => {
+//   return {
+//     type: 'FETCH_DATA_SUCCESS'
+//   };
+// };
 
 it('should execute fetch data', () => {
-  const store = mockStore({});
-  const cred = { email: 'test@test.com', password: 'test1234' };
-  // Return the promise
-  return store
-    .dispatch(
-      () =>
-        // console.log(
-        //   firebase.auth().signInWithEmailAndPassword(cred.email, cred.password)
-        // )
-        firebase.auth().signInWithEmailAndPassword(cred.email, cred.password)
-
-      //actions.login(cred)
-    )
-    .then(() => {
-      //const actions = store.getActions();
-
-      //console.log(store.getActions()[0]);
-      console.log(MockFirebase);
-      expect(store.getActions()[0]).toEqual(success());
-    });
+  // const store = mockStore({});
+  // const cred = { email: 'test@test.com', password: 'test1234' };
+  // // Return the promise
+  // return store
+  //   .dispatch(
+  //     () =>
+  //       // console.log(
+  //       //   firebase.auth().signInWithEmailAndPassword(cred.email, cred.password)
+  //       // )
+  //       firebase.auth().signInWithEmailAndPassword(cred.email, cred.password)
+  //     //actions.login(cred)
+  //   )
+  //   .then(() => {
+  //     const actions = store.getActions();
+  //     console.log(store.getActions()[0]);
+  //     console.log(MockFirebase);
+  //     expect(store.getActions()[0]).toEqual(success());
+  //   });
 });
 
 // Mock all the exports in the module.
