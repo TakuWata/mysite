@@ -1,3 +1,6 @@
+// このファイルに統合テストを実装予定です。
+// 一旦テストをパスするため、全てコメントアウトします。
+
 // import React from 'react';
 // import Root from '../redux/Root';
 // import { createMount } from '@material-ui/core/test-utils';

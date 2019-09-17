@@ -60,7 +60,13 @@ const Login = props => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component='h1' variant='h5'>
-          Log in
+          ログイン
+        </Typography>
+        <Typography color='primary' style={{ marginTop: '1rem' }}>
+          *送信したお問い合わせ内容は、ログイン後に、確認可能です。以下のメールアドレスとパスワードを使ってください。
+        </Typography>
+        <Typography color='primary'>
+          email: test@test.com password: test1234
         </Typography>
         <form className={classes.form} noValidate onSubmit={onSubmit}>
           <TextField
@@ -70,7 +76,7 @@ const Login = props => {
             required
             fullWidth
             id='email'
-            label='Email Address'
+            label='メールアドレス'
             name='email'
             autoComplete='email'
             autoFocus
@@ -86,7 +92,7 @@ const Login = props => {
             required
             fullWidth
             name='password'
-            label='Password'
+            label='パスワード'
             type='password'
             id='password'
             autoComplete='current-password'
@@ -96,10 +102,7 @@ const Login = props => {
             value={passwordValue}
             autoComplete='off'
           />
-          <FormControlLabel
-            control={<Checkbox value='remember' color='primary' />}
-            label='Remember me'
-          />
+
           <Button
             type='submit'
             fullWidth
@@ -107,14 +110,13 @@ const Login = props => {
             color='primary'
             className={classes.submit}
           >
-            Sign In
+            ログイン
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link to='#'>Forgot password?</Link>
-            </Grid>
             <Grid item>
-              <Link to='/signup'>{"Don't have an account? Sign Up"}</Link>
+              <Link to='/signup'>
+                {'アカウントをお持ちではない場合、サインアップして下さい。'}
+              </Link>
             </Grid>
           </Grid>
         </form>

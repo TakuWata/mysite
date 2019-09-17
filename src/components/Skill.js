@@ -76,7 +76,7 @@ const Skill = () => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        <Typography variant='h3'>Skills</Typography>
+        <Typography variant='h5'>スキルセット</Typography>
       </Grid>
 
       <Grid item sm={4} xs={6}>

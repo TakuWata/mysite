@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 import { connect } from 'react-redux';
 import { logOut } from '../redux/actions';
 import { Link } from 'react-router-dom';
@@ -32,10 +32,10 @@ const Navbar = props => {
         return (
           <React.Fragment>
             <Button component={Link} to='/admin' color='inherit'>
-              Admin
+              アドミン
             </Button>
             <Button onClick={props.logOut} color='inherit'>
-              Logout
+              ログアウト
             </Button>
           </React.Fragment>
         );
@@ -43,10 +43,10 @@ const Navbar = props => {
         return (
           <React.Fragment>
             <Button component={Link} to='/' color='inherit'>
-              Home
+              ホーム
             </Button>
             <Button onClick={props.logOut} color='inherit'>
-              Logout
+              ログアウト
             </Button>
           </React.Fragment>
         );
@@ -54,10 +54,10 @@ const Navbar = props => {
       return (
         <div>
           <Button component={Link} to='/admin' color='inherit'>
-            Login
+            ログイン
           </Button>
           <Button component={Link} to='/signup' color='inherit'>
-            Sign Up
+            サインアップ
           </Button>
         </div>
       );
@@ -72,11 +72,13 @@ const Navbar = props => {
             className={classes.menuButton}
             color='inherit'
             aria-label='menu'
+            component={Link}
+            to='/'
           >
-            <MenuIcon />
+            <HomeIcon />
           </IconButton>
           <Typography variant='h6' className={classes.title}>
-            News
+            ポートフォリオサイト
           </Typography>
           {renderButton()}
         </Toolbar>

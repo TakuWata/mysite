@@ -75,19 +75,33 @@ let Inquiry = props => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Typography>お問い合わせ</Typography>
+      <Typography variant='h6'>お問い合わせ</Typography>
+      <Typography color='primary'>
+        *現在、ポートフォリオサイトとして運用中のため、個人情報などを含む情報の入力は行わないでください。
+      </Typography>
+      <Typography color='primary'>
+        *送信したお問い合わせ内容は、ログイン後に、確認可能です。以下のメールアドレスとパスワードを使ってください。
+      </Typography>
+      <Typography color='primary'>
+        email: test@test.com password: test1234
+      </Typography>
+
       <div>
-        <Field name='title' component={renderTextField} label='Title' />
+        <Field name='title' component={renderTextField} label='タイトル' />
       </div>
       <div>
-        <Field name='email' component={renderTextField} label='Email' />
+        <Field
+          name='email'
+          component={renderTextField}
+          label='メールアドレス'
+        />
       </div>
       <div />
       <div>
         <Field
           name='content'
           component={renderTextField}
-          label='Content'
+          label='お問い合わせ内容'
           multiline
           rowsMax='4'
           margin='normal'
@@ -101,7 +115,7 @@ let Inquiry = props => {
           color='primary'
           disabled={pristine || submitting}
         >
-          Submit
+          送信
         </Button>
         <Button
           type='button'
@@ -111,7 +125,7 @@ let Inquiry = props => {
           disabled={pristine || submitting}
           onClick={reset}
         >
-          Clear Values
+          クリア
         </Button>
       </div>
     </form>
